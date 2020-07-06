@@ -1,0 +1,17 @@
+<mat-toolbar style="justify-content: space-between;">
+    <div class="row">
+        <span>Microservices.POC</span>
+
+        <nav>
+            <ul style="list-style: none; display: flex; flex-direction: row;margin: 0">
+                <li><a mat-button routerLink="/home" routerLinkActive="active">Home</a></li>
+                <li><a mat-button routerLink="/products" routerLinkActive="active">Products</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="" *ngIf="openIdConnectService.userAvailable">
+        <button mat-button (click)="openIdConnectService.triggerSignOut()">Sign Out</button>
+    </div>
+
+</mat-toolbar>

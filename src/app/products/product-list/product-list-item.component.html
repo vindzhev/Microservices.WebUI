@@ -1,0 +1,15 @@
+<mat-card class="example-card" *ngIf="product">
+    <mat-card-header>
+        <mat-card-title>{{product?.name}}</mat-card-title>
+        <mat-card-subtitle>{{product?.code}} | Insured limit: {{product?.insuredLimit}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{product?.image}}" alt="{{product?.name}}">
+    <mat-card-content>
+        <p>{{product?.description}}</p>
+        <ins-cover-list [covers]="product?.covers"></ins-cover-list>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-button [routerLink]="[ '/products' , product?.id ]" style="width: 100%; text-align: center;">Read
+            More</a>
+    </mat-card-actions>
+</mat-card>
