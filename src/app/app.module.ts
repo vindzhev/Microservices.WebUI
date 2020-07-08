@@ -32,6 +32,7 @@ import { RedirectSilentRenewComponent } from './redirect-silent-renew/redirect-s
 import { CustomMaterialModuleModule } from './shared/material/custom-material-module.module';
 import { GlobalErrorHandler } from './shared/global-error-handler';
 import { ErrorLoggerService } from './shared/error-logger.service';
+import { PolicyModule } from './policy/policy.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { ErrorLoggerService } from './shared/error-logger.service';
     CommonModule,
     FormsModule,
 
+    PolicyModule,
+
     CustomMaterialModuleModule
   ],
   providers: [
@@ -67,11 +70,11 @@ import { ErrorLoggerService } from './shared/error-logger.service';
       useClass: EnsureAcceptHeaderInterceptor,
       multi: true
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: WriteOutJsonInterceptor,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: WriteOutJsonInterceptor,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HandleHttpErrorInterceptor,

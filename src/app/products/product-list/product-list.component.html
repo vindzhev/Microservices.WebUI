@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="row" *ngIf="products$ | async as products" style="margin: 20px 50px;">
-        <ins-product-list-item class="col-sm-2" *ngFor="let product of products" [product]="product">{{product.name}}
+    <div class="row" *ngIf="products$ | async as products">
+        <ins-product-list-item class="col-sm-3" *ngFor="let product of products" [product]="product"
+            style="display: flex;">{{product.name}}
         </ins-product-list-item>
     </div>
 </div>

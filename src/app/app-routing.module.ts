@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: ':id', component: ProductComponent, canActivate: [RequireAuthenticatedUserRouteGuardService] }
     ]
   },
-  { path: 'policies', component: HomeComponent },
+  { path: 'policies', loadChildren: () => import('./policy/policy.module').then(m => m.PolicyModule) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'signin-oidc', component: SigninOidcComponent },
   { path: 'redirect-silentrenew', component: RedirectSilentRenewComponent },

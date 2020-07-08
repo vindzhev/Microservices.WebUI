@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Product, Answer, Question, Price, Offer } from '../models/Product';
@@ -21,7 +21,9 @@ export class ProductComponent implements OnDestroy {
   price: Price;
   offer: Offer;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  calculating = false;
+
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {
     const oneYerFromNowDate = new Date();
     oneYerFromNowDate.setFullYear(oneYerFromNowDate.getFullYear() + 1);
 
@@ -71,9 +73,21 @@ export class ProductComponent implements OnDestroy {
     }
   }
 
-  onSubmit(): void {
+  calculatePrice(): void {
+    this.calculating = true;
     this.productService.calculateOffer(this.offer)
-      .then(data => this.price = data);
+      .then(data => {
+        this.price = data;
+        this.calculating = false;
+      });
+  }
+
+  createOffer(): void {
+    //Create offer http call
+    //when offer number is returned
+    //redirect to create policy page
+
+    this.router.navigate(['/policies', 'buy', 'e7ee3fc9-17f2-491b-bd06-7e64c11e0541']);
   }
 
   ngOnDestroy() {

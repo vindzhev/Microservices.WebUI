@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -23,7 +25,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -34,7 +38,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatProgressSpinnerModule
   ]
 })
 export class CustomMaterialModuleModule { }

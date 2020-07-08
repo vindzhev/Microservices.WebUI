@@ -1,4 +1,4 @@
-<div class="container" *ngIf="product$ | async as product" style="margin: 20px auto;">
+<div *ngIf="product$ | async as product; else loading">
     <div class="row">
         <div class="col-sm-4">
             <img src="{{product?.image}}" alt="{{product?.name}}" style="width: 100%;">
@@ -17,8 +17,9 @@
             <div class="row" style="padding: 0 15px;">
                 <div style="width: 100%;display: flex;flex-direction:row;justify-content: space-between;">
                     <strong>Price:</strong>
-                    <span *ngIf="price">{{this.price.totalPrice | currency: 'EUR'}}</span>
-                    <span *ngIf="!price">N/A</span>
+                    <span *ngIf="price && !calculating">{{this.price.totalPrice | currency: 'EUR'}}</span>
+                    <span *ngIf="!price && !calculating">N/A</span>
+                    <mat-progress-spinner mode="indeterminate" [diameter]=15 *ngIf="calculating"></mat-progress-spinner>
                 </div>
             </div>
         </div>
@@ -31,7 +32,7 @@
 
             <p>Enter the data needed to calculate the price</p>
 
-            <div class="row">
+            <div class="row" style="width: 100%; margin: 0 auto;">
 
                 <div class="col-sm-12">
                     <form (ngSubmit)="onSubmit()">
@@ -78,7 +79,12 @@
         <div class="col-sm-12 margin-top-10">
             <div class="d-flex flex-row-reverse">
                 <div class="p-2">
-                    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()">Calculate price</button>
+                    <button mat-flat-button color="primary" [disabled]="!price" (click)="createOffer()">Buy</button>
+                </div>
+
+                <div class="p-2">
+                    <button mat-flat-button color="primary" type="submit" (click)="calculatePrice()">Calculate
+                        price</button>
                 </div>
 
                 <div class="p-2">
@@ -88,6 +94,13 @@
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <div class="loading-indicator">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</ng-template>
+
 
 <style>
     .margin-top-10 {
@@ -106,5 +119,30 @@
 
     mat-checkbox {
         min-width: 50%;
+    }
+
+    .loading-indicator {
+        position: fixed;
+        z-index: 999;
+        height: 2em;
+        width: 2em;
+        overflow: show;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    /* Transparent Overlay */
+    .loading-indicator:before {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
     }
 </style>

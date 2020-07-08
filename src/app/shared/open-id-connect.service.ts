@@ -33,6 +33,7 @@ export class OpenIdConnectService {
       this.currentUser = null;
       this.userLoaded$.next(false);
     });
+
   }
 
   get userAvailable(): boolean {

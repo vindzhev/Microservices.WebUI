@@ -7,7 +7,7 @@ import { OpenIdConnectService } from '../open-id-connect.service';
 @Injectable()
 export class AddAuthorizationHeaderInterceptor implements HttpInterceptor {
 
-    constructor(private openIdConnectservice: OpenIdConnectService) { console.log(this.openIdConnectservice) }
+    constructor(private openIdConnectservice: OpenIdConnectService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         request = request.clone({

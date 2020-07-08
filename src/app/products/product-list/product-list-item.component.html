@@ -1,15 +1,15 @@
-<mat-card class="example-card" *ngIf="product">
-    <mat-card-header>
+<mat-card class="example-card" *ngIf="product" style="display: flex; flex-direction: column;">
+    <mat-card-header style="flex-shrink: 0;">
         <mat-card-title>{{product?.name}}</mat-card-title>
         <mat-card-subtitle>{{product?.code}} | Insured limit: {{product?.insuredLimit}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{product?.image}}" alt="{{product?.name}}">
-    <mat-card-content>
+    <img mat-card-image src="{{product?.image}}" alt="{{product?.name}}" style="width: 270px;height: 170px;">
+    <mat-card-content style="flex-grow: 1; overflow: auto;">
         <p>{{product?.description}}</p>
         <ins-cover-list [covers]="product?.covers"></ins-cover-list>
     </mat-card-content>
     <mat-card-actions>
-        <a mat-button [routerLink]="[ '/products' , product?.id ]" style="width: 100%; text-align: center;">Read
-            More</a>
+        <button mat-button [routerLink]="[ '/products' , product?.id ]" style="width: 100%; text-align: center;">Read
+            More</button>
     </mat-card-actions>
 </mat-card>
