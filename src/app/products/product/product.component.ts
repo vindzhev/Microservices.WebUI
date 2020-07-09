@@ -1,48 +1,38 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { Product, Answer, Question, Price, Offer } from '../models/Product';
+import { Product, Question, Price, Offer, Cover } from '../models/Product';
 
 import { map } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ins-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnDestroy {
+export class ProductComponent {
   title = 'Product Details';
   product$: Observable<Product>;
-  routeSub: any;
 
   price: Price;
-  offer: Offer;
+  covers: Cover[];
+  offer: Offer = new Offer();
 
   calculating = false;
+  creatingOffer = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {
-    const oneYerFromNowDate = new Date();
-    oneYerFromNowDate.setFullYear(oneYerFromNowDate.getFullYear() + 1);
-
-    this.routeSub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.collectProductData(params.id);
     });
-
-    this.offer = {
-      policyFrom: new Date(),
-      policyTo: oneYerFromNowDate,
-      productCode: '',
-      answers: [],
-      selectedCovers: []
-    };
   }
 
   private collectProductData(id: string): void {
     this.product$ = this.productService.getProduct(id)
       .pipe(map(response => {
+        this.covers = response.covers;
+
         this.offer.answers = [];
         this.offer.productCode = response.code;
 
@@ -63,34 +53,27 @@ export class ProductComponent implements OnDestroy {
     });
   }
 
-  onCheckChange(event: any) {
-    const coverIndex = this.offer.selectedCovers.indexOf(event.source.value);
+  getCoverByCode(code: string): string {
+    const coverObj = this.covers.find(cover => {
+      return cover.code.toLowerCase() === code.toLowerCase();
+    });
 
-    if (event.checked && coverIndex < 0) {
-      this.offer.selectedCovers.push(event.source.value);
-    } else if (!event.checked && coverIndex >= 0) {
-      this.offer.selectedCovers.splice(coverIndex, 1);
-    }
+    return coverObj?.name ?? code;
   }
 
-  calculatePrice(): void {
+  calculatePrice(proceedToDetails: boolean = false): void {
     this.calculating = true;
+
     this.productService.calculateOffer(this.offer)
-      .then(data => {
+      .then((data: Price) => {
+        console.log(data.offerNumber);
         this.price = data;
         this.calculating = false;
+
+        if (proceedToDetails) {
+          this.router.navigate(['/policies', 'buy', this.price.offerNumber]);
+        }
       });
   }
 
-  createOffer(): void {
-    //Create offer http call
-    //when offer number is returned
-    //redirect to create policy page
-
-    this.router.navigate(['/policies', 'buy', 'e7ee3fc9-17f2-491b-bd06-7e64c11e0541']);
-  }
-
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
-  }
 }

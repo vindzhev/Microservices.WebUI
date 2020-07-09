@@ -2,3 +2,71 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 48%;
+}
+
+.flex-row-space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.flex-grow-fill {
+    flex-grow: 1;
+}
+
+.flex-no-shrink {
+    flex-shrink: 0;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+div.button-container {
+    display: inline-block;
+    position: relative;
+
+    width: 100%;
+    margin-top: 30px;
+
+    div.button-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

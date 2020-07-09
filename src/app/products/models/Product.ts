@@ -38,7 +38,17 @@ export interface Answer {
     question: Question;
 }
 
-export interface Offer {
+export class Offer {
+    constructor() {
+        const oneYerFromNowDate = new Date();
+        oneYerFromNowDate.setFullYear(oneYerFromNowDate.getFullYear() + 1);
+
+        this.productCode = '';
+        this.policyFrom = new Date();
+        this.policyTo = oneYerFromNowDate;
+        this.selectedCovers = [];
+    }
+
     productCode: string;
     policyFrom: Date;
     policyTo: Date;

@@ -1,99 +1,114 @@
-<div *ngIf="product$ | async as product; else loading">
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="{{product?.image}}" alt="{{product?.name}}" style="width: 100%;">
-
-            <div class="row" style="padding: 0 15px;">
-                <section class="example-section">
-                    <mat-checkbox class="example-margin" *ngFor="let cover of product.covers"
-                        (change)="onCheckChange($event)" [value]="cover.code">
-                        {{cover.name}}
-                    </mat-checkbox>
-                </section>
+<section *ngIf="product$ | async as product; else loading">
+    <article>
+        <header class="row full-width space-between no-margin">
+            <div class="insurance-cover">
+                <img class="full-width" src="{{product?.image}}" alt="{{product?.name}}">
             </div>
+            <div style="width:70%">
+                <h1>{{product?.name}}</h1>
+                <span>{{product?.description}}</span>
+            </div>
+        </header>
 
-            <hr />
-
-            <div class="row" style="padding: 0 15px;">
-                <div style="width: 100%;display: flex;flex-direction:row;justify-content: space-between;">
-                    <strong>Price:</strong>
-                    <span *ngIf="price && !calculating">{{this.price.totalPrice | currency: 'EUR'}}</span>
-                    <span *ngIf="!price && !calculating">N/A</span>
-                    <mat-progress-spinner mode="indeterminate" [diameter]=15 *ngIf="calculating"></mat-progress-spinner>
+        <section class="full-width">
+            <form #offerForm="ngForm" (submit)="calculatePrice()">
+                <div class="row">
+                    <mat-form-field class="full-width">
+                        <mat-label>Covers</mat-label>
+                        <mat-select [(ngModel)]="offer.selectedCovers" multiple name="covers" #covers="ngModel"
+                            required>
+                            <mat-option *ngFor="let cover of product.covers" [value]="cover.code">
+                                {{cover.name}} - Total Insured: {{(cover?.totalInsured || 0) | currency:'EUR'}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-sm-8">
-            <h1 class="display-3">{{product?.name}}</h1>
-            <p class="lead">{{product?.description}}</p>
+                <div class="row flex-row-space-between nowrap">
+                    <mat-form-field style="width: 45%;">
+                        <mat-label>Policy from</mat-label>
+                        <input matInput [matDatepicker]="policyFromPicker" [(ngModel)]="offer.policyFrom"
+                            name="policyFrom" required>
+                        <mat-datepicker-toggle matSuffix [for]="policyFromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #policyFromPicker></mat-datepicker>
+                    </mat-form-field>
 
-            <hr class="my-4">
-
-            <p>Enter the data needed to calculate the price</p>
-
-            <div class="row" style="width: 100%; margin: 0 auto;">
-
-                <div class="col-sm-12">
-                    <form (ngSubmit)="onSubmit()">
-                        <div class="row" style="justify-content: space-between;">
-                            <mat-form-field appearance="fill" style="width: 45%;">
-                                <mat-label>Policy from</mat-label>
-                                <input matInput [matDatepicker]="policyFromPicker" id="policyFrom"
-                                    [(ngModel)]="offer.policyFrom" name="policyFrom" placeholder="Policy from">
-                                <mat-datepicker-toggle matSuffix [for]="policyFromPicker"></mat-datepicker-toggle>
-                                <mat-datepicker #policyFromPicker></mat-datepicker>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="fill" style="width: 45%;">
-                                <mat-label>Policy to</mat-label>
-                                <input matInput [matDatepicker]="policyToPicker" id="policyTo"
-                                    [(ngModel)]="offer.policyTo" name="policyTo" placeholder="Policy to">
-                                <mat-datepicker-toggle matSuffix [for]="policyToPicker"></mat-datepicker-toggle>
-                                <mat-datepicker #policyToPicker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row" *ngFor="let item of (offer?.answers || [])">
-                            <mat-form-field appearance="fill" style="width: 100%">
-                                <mat-label>{{item.question.text}}</mat-label>
-
-                                <input matInput type="number" *ngIf="item.question.type === 1" class="form-control"
-                                    [(ngModel)]="item.answer" name="answer">
-
-                                <mat-select *ngIf="item.question.type === 3" [(ngModel)]="item.answer" name="answer">
-                                    <mat-option *ngFor="let opt of item.question.choices" [value]="opt.code">
-                                        {{opt.label}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                    </form>
+                    <mat-form-field style="width: 45%;">
+                        <mat-label>Policy to</mat-label>
+                        <input matInput [matDatepicker]="policyToPicker" [(ngModel)]="offer.policyTo" name="policyTo"
+                            required>
+                        <mat-datepicker-toggle matSuffix [for]="policyToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #policyToPicker></mat-datepicker>
+                    </mat-form-field>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div class="row flex-row-space-between wrap">
+                    <mat-form-field style="width: 45%" *ngFor="let item of (offer?.answers || [])"
+                        [ngSwitch]="item.question.type">
+                        <mat-label>{{item.question.text}}</mat-label>
+
+                        <input matInput type="number" *ngSwitchCase="1" [(ngModel)]="item.answer"
+                            [id]="item.question.code" [name]="item.question.code" required>
+
+                        <mat-select *ngSwitchCase="3" [(ngModel)]="item.answer" [id]="item.question.code"
+                            [name]="item.question.code" required>
+                            <mat-option *ngFor="let opt of item.question.choices" [value]="opt.code">
+                                {{opt.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="row flex-column space-between nowrap" *ngIf="price">
+                    <div class="row flex-row-space-between nowrap" *ngFor="let cover of price.coverPrices | keyvalue"
+                        style="padding: 0 20px">
+                        <span><strong>{{getCoverByCode(cover?.key)}}:</strong></span>
+                        <span>{{cover?.value | currency: 'EUR'}}</span>
+                    </div>
+
+                    <div class="row flex-row-space-between nowrap"
+                        style="padding: 10px 20px 0px 20px; border-top: 1px solid #000;">
+                        <span><strong>Total Price</strong></span>
+                        <span *ngIf="price && !calculating">{{price?.totalPrice | currency: 'EUR'}}</span>
+                        <span *ngIf="!price && !calculating">N/A</span>
+                        <mat-progress-spinner *ngIf="calculating" diameter=15 mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </article>
 
     <div class="row">
-        <div class="col-sm-12 margin-top-10">
+        <div class="flex-row full-width flex-row-reverse">
             <div class="d-flex flex-row-reverse">
-                <div class="p-2">
-                    <button mat-flat-button color="primary" [disabled]="!price" (click)="createOffer()">Buy</button>
+
+                <div class="button-container">
+                    <div class="spinner-container" *ngIf="creatingOffer">
+                        <mat-spinner diameter="24"></mat-spinner>
+                    </div>
+
+                    <button mat-flat-button type="button" color="primary"
+                        [disabled]="creatingOffer || !offerForm.valid || !price"
+                        (click)="calculatePrice(true)">Next</button>
                 </div>
 
-                <div class="p-2">
-                    <button mat-flat-button color="primary" type="submit" (click)="calculatePrice()">Calculate
-                        price</button>
+                <div class="button-container">
+                    <div class="spinner-container" *ngIf="calculating">
+                        <mat-spinner diameter="24"></mat-spinner>
+                    </div>
+
+                    <button mat-flat-button type="submit" color="primary" [disabled]="calculating || offerForm.invalid"
+                        (click)="calculatePrice()">Calculate price</button>
                 </div>
 
-                <div class="p-2">
+                <div class="button-container">
                     <button mat-flat-button routerLink="/products">Back</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <ng-template #loading>
     <div class="loading-indicator">
@@ -144,5 +159,26 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .spinner-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .button-container {
+        display: inline-block;
+        position: relative;
+
+        width: 100%;
+        margin-top: 30px;
+        margin-left: 10px;
     }
 </style>

@@ -1,5 +1,28 @@
-<ins-navigation></ins-navigation>
-<div class="container" style="min-height: calc(100% - 148px);">
-    <router-outlet></router-outlet>
-</div>
-<ins-footer></ins-footer>
+<section>
+    <ins-navigation></ins-navigation>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    <ins-footer></ins-footer>
+</section>
+
+
+<style>
+    section {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    div.container {
+        flex-grow: 1;
+        padding: 20px 0;
+    }
+
+    ins-navigation,
+    ins-footer,
+    div.container {
+        flex-shrink: 0;
+    }
+</style>

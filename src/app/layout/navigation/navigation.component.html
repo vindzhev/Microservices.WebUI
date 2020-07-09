@@ -11,8 +11,17 @@
         </nav>
     </div>
 
-    <div class="" *ngIf="openIdConnectService.userAvailable">
-        <button mat-button (click)="openIdConnectService.triggerSignOut()">Sign Out</button>
+    <div>
+        <button mat-button (click)="openIdConnectService.triggerSignIn()"
+            *ngIf="!openIdConnectService.userAvailable">Sign In</button>
+        <button mat-button (click)="openIdConnectService.triggerSignOut()"
+            *ngIf="openIdConnectService.userAvailable">Sign Out</button>
     </div>
 
 </mat-toolbar>
+
+<style>
+    mat-toolbar {
+        padding: 0 20px;
+    }
+</style>

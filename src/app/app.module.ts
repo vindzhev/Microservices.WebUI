@@ -17,7 +17,7 @@ import { ProductListItemComponent } from './products/product-list/product-list-i
 import { CoverListComponent } from './products/cover-list/cover-list.component';
 
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OpenIdConnectService } from './shared/open-id-connect.service';
 import { SigninOidcComponent } from './signin-oidc/signin-oidc.component';
@@ -54,7 +54,7 @@ import { PolicyModule } from './policy/policy.module';
     HttpClientModule,
     CommonModule,
     FormsModule,
-
+    ReactiveFormsModule,
     PolicyModule,
 
     CustomMaterialModuleModule

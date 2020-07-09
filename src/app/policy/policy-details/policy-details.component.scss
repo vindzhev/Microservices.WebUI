@@ -1,0 +1,12 @@
+mat-card {
+    border-left-width: 5px;
+    border-left-style: solid;
+    
+    &.active {
+        border-left-color: limegreen;
+    }
+
+    &.inactive {
+        border-left-color: red;
+    }
+}

@@ -25,4 +25,7 @@ export class PolicyDetailsComponent implements OnInit {
     this.policy$ = this.policyService.getPolicyById(id);
   }
 
+  getStatusClass(date: string): string {
+    return new Date(date) < new Date() ? 'inavtive' : 'active';
+  }
 }
