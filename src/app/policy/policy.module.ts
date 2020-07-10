@@ -9,6 +9,7 @@ import { CustomMaterialModuleModule } from '../shared/material/custom-material-m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { PolicyCreateComponent } from './policy-create/policy-create.component';
+import { PolicySearchService } from './policy-search.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { PolicyCreateComponent } from './policy-create/policy-create.component';
 
     CustomMaterialModuleModule
   ],
-  providers: [PolicyService],
+  providers: [PolicyService, PolicySearchService],
   exports: [CustomMaterialModuleModule]
 })
 export class PolicyModule { }

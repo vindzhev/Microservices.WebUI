@@ -9,6 +9,20 @@ export interface Policy {
     covers: string[];
 }
 
+export interface PolicySearchResultList {
+    policies: PolicySearchResult[];
+}
+
+export interface PolicySearchResult {
+    number: string;
+    productCode: string;
+    dateFrom: Date;
+    dateTo: Date;
+    policyHolder: string;
+    totalPremum: number;
+    covers: string[];
+}
+
 export interface PolicyOffer {
     offerNumber: string;
     policyHolder: PolicyHolder;

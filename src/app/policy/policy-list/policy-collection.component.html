@@ -23,24 +23,34 @@
         <hr />
 
         <table mat-table [dataSource]="policies" class="mat-elevation-z8 full-width">
-            <ng-container matColumnDef="code">
+            <ng-container matColumnDef="number">
                 <th mat-header-cell *matHeaderCellDef> Number </th>
-                <td mat-cell *matCellDef="let policy"> {{policy.code}} </td>
+                <td mat-cell *matCellDef="let policy"> {{policy.number}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="validFrom">
+            <ng-container matColumnDef="productCode">
+                <th mat-header-cell *matHeaderCellDef> Code </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.productCode}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateFrom">
                 <th mat-header-cell *matHeaderCellDef> Start Date </th>
-                <td mat-cell *matCellDef="let policy"> {{policy.validFrom}} </td>
+                <td mat-cell *matCellDef="let policy"> {{policy.dateFrom | date}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="validTo">
+            <ng-container matColumnDef="dateTo">
                 <th mat-header-cell *matHeaderCellDef> End Date </th>
-                <td mat-cell *matCellDef="let policy"> {{policy.validTo}} </td>
+                <td mat-cell *matCellDef="let policy"> {{policy.dateTo | date}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="holder">
+            <ng-container matColumnDef="policyHolder">
                 <th mat-header-cell *matHeaderCellDef> Policy Holder </th>
-                <td mat-cell *matCellDef="let policy"> {{policy.holder}} </td>
+                <td mat-cell *matCellDef="let policy"> {{policy.policyHolder}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalPremum">
+                <th mat-header-cell *matHeaderCellDef> Total Premium </th>
+                <td mat-cell *matCellDef="let policy"> {{policy.totalPremum | currency: 'EUR'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
