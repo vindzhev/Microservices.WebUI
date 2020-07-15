@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class PolicyService {
-    private baseUrl = 'http://localhost:5001';
+    private baseUrl = 'http://localhost:9999';
     private getPolicyByIdUrl = `${this.baseUrl}\\policies`;
 
     constructor(private http: HttpClient) { }

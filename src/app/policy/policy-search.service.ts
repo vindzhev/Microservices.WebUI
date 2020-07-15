@@ -4,7 +4,7 @@ import { PolicySearchResultList } from './policy';
 
 @Injectable()
 export class PolicySearchService {
-    private baseUrl = 'http://localhost:5001';
+    private baseUrl = 'http://localhost:9999';
     private getPolicies = `${this.baseUrl}\\policysearch`;
 
     constructor(private http: HttpClient) { }

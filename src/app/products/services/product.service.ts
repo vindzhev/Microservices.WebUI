@@ -7,7 +7,7 @@ import { Product, Offer, Price } from '../models/Product';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:5001';
+  private baseUrl = 'http://localhost:9999';
   private productsUrl = `${this.baseUrl}/products`;
   private offerCalculation = `${this.baseUrl}/offers`;
 
