@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:9998',
+  apiUrl: 'http://localhost:9999',
   openIdConnectSettings: {
     authority: 'http://localhost:9998', //Change to user API Gateway,
     client_id: '7ceea8f0-9ef6-4a41-b0d7-d4ebe99430bb',
