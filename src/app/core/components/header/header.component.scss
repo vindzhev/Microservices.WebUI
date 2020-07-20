@@ -1,0 +1,51 @@
+@import "_colours";
+@import '~@angular/material/theming';
+
+button {
+    outline: none;
+}
+
+mat-toolbar {
+    padding: 0px 20px;
+    background-color: $white;
+    justify-content: space-between;
+    @include mat-elevation(2, $dark-grayish-blue, 0.8);
+
+    div.row {
+        align-items: center;
+
+        span {
+            img {
+                height: 62px;
+            }
+        }
+
+        nav {
+            ul {
+                display: flex;
+                flex-direction: row;
+                
+                margin: 0px;
+                list-style: none;
+    
+                button {
+
+                    &.active {
+                        color: $white;
+                        background-color: $vivid-blue;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

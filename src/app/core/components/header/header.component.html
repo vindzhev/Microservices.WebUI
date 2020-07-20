@@ -1,0 +1,32 @@
+<mat-toolbar>
+    <div class="row full-width space-between">
+        <span>
+            <img src="/assets/microservices-logo.png" alt="microservices-logo">
+            Microservices.POC
+        </span>
+
+        <nav>
+            <ul>
+                <li><button mat-flat-button [routerLink]="['/']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Home</button></li>
+                <li><button mat-flat-button [routerLink]="['/products']" routerLinkActive="active">Products</button>
+                </li>
+                <li><button mat-flat-button [routerLink]="['/policies']" routerLinkActive="active">Policies</button>
+                </li>
+                <li *ngIf="!authenticationService.userAvailable">
+                    <button mat-flat-button (click)="authenticationService.triggerSignIn()">Sign In</button>
+                </li>
+                <li *ngIf="authenticationService.userAvailable">
+                    <button mat-flat-button [matMenuTriggerFor]="profileOptions">
+                        {{openIdConnectService.user.profile.name | uppercase}}
+                    </button>
+                    <mat-menu #profileOptions="matMenu">
+                        <button mat-menu-item>Profile</button>
+                        <button mat-menu-item (click)="authenticationService.triggerSignOut()">Sign Out</button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</mat-toolbar>

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '_colours';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -69,4 +70,44 @@ div.button-container {
         align-items: center;
         justify-content: center;
     }
+}
+
+button {
+    outline: none !important;
+}
+
+//Angular components overrides
+
+.mat-step-header {
+    display: flex;
+    flex-direction: column-reverse;
+    
+    align-items: center;
+    justify-content: flex-end;
+
+    &:hover {
+        background: none;
+    }
+
+    .mat-step-icon {
+        margin-right: 0 !important;
+        background-color: $grayish-blue-secondary !important;
+
+        &.mat-step-icon-selected {
+            background-color: $vivid-blue !important;
+        }
+
+        &.mat-step-icon-state-done {
+            background-color: $dark-moderate-cyan !important;
+        }
+    }
+
+    .mat-step-label {
+        text-align: center !important;
+    }
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+    color: $white !important;
+    background-color: $vivid-blue !important;
 }
