@@ -15,6 +15,7 @@ import {
 } from './';
 
 import { AngularMaterialModule } from '@shared/index';
+import { CategoryService } from './services';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { AngularMaterialModule } from '@shared/index';
             useClass: HttpErrorInterceptor,
             multi: true,
         },
-        AuthenticationGuard
+        AuthenticationGuard,
+        CategoryService
     ],
     exports: [
         AngularMaterialModule,

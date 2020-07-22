@@ -9,8 +9,9 @@ import {
 import { AuthenticationGuard } from '@core/guards';
 
 const routes: Routes = [
-    { path: '', component: ProductsPage, pathMatch: 'full' },
-    { path: ':id', component: ProductDetailsPage, canActivate: [AuthenticationGuard] }
+    // { path: '', component: ProductsPage, pathMatch: 'full' },
+    { path: ':category', component: ProductsPage },
+    { path: ':category/offers', component: ProductDetailsPage, canActivate: [AuthenticationGuard] }
 ];
 
 @NgModule({

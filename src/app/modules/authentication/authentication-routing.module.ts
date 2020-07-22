@@ -6,7 +6,7 @@ import { RedirectSilentPage } from './pages/redirect-silent/redirect-silent.page
 
 const routes: Routes = [
     { path: 'signin-oidc', component: SigninOidcPage },
-    { path: 'redirect-silentrenew', component: RedirectSilentPage },
+    { path: 'redirect-silent', component: RedirectSilentPage },
 ];
 
 @NgModule({

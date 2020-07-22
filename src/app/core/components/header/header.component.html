@@ -7,18 +7,31 @@
 
         <nav>
             <ul>
-                <li><button mat-flat-button [routerLink]="['/']" routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}">Home</button></li>
-                <li><button mat-flat-button [routerLink]="['/products']" routerLinkActive="active">Products</button>
+                <li>
+                    <button mat-flat-button [routerLink]="['/']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Home</button>
                 </li>
-                <li><button mat-flat-button [routerLink]="['/policies']" routerLinkActive="active">Policies</button>
+                <li>
+                    <button mat-flat-button [routerLink]="['/products']" routerLinkActive="active">Products</button>
+                </li>
+                <li>
+                    <button mat-flat-button [matMenuTriggerFor]="insuranceCategories">
+                        Insurances
+                    </button>
+                    <mat-menu #insuranceCategories="matMenu">
+                        <button mat-menu-item *ngFor="let category of categories$ | async as categories"
+                            [routerLink]="['/products', category]">{{category | titlecase}}</button>
+                    </mat-menu>
+                </li>
+                <li>
+                    <button mat-flat-button [routerLink]="['/policies']" routerLinkActive="active">Policies</button>
                 </li>
                 <li *ngIf="!authenticationService.userAvailable">
                     <button mat-flat-button (click)="authenticationService.triggerSignIn()">Sign In</button>
                 </li>
                 <li *ngIf="authenticationService.userAvailable">
                     <button mat-flat-button [matMenuTriggerFor]="profileOptions">
-                        {{openIdConnectService.user.profile.name | uppercase}}
+                        {{authenticationService.user.profile.name | uppercase}}
                     </button>
                     <mat-menu #profileOptions="matMenu">
                         <button mat-menu-item>Profile</button>

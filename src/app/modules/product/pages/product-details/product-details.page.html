@@ -1,0 +1,35 @@
+<mat-horizontal-stepper labelPosition="bottom" [linear]="true" #stepper>
+    <mat-step [stepControl]="questionStep.questionsFormGroup" [editable]="isEditable">
+        <ng-template matStepLabel>{{ 'Questions' | uppercase}}</ng-template>
+
+        <ins-questions [category]='category' #questionStep></ins-questions>
+
+        <button mat-button matStepperNext>Next</button>
+    </mat-step>
+    <mat-step [stepControl]="holderInformationStep.holderInformationFormGroup" [editable]="isEditable">
+        <ng-template matStepLabel>{{ 'Holder information' | uppercase}}</ng-template>
+
+        <ins-holder-info #holderInformationStep></ins-holder-info>
+
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+        <ng-template matStepLabel>{{ 'Offer' | uppercase}}</ng-template>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" [editable]="isEditable">
+        <ng-template matStepLabel>{{ 'Payment' | uppercase}}</ng-template>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

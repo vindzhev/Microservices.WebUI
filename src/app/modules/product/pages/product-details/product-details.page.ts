@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './product-details.page.html',
@@ -6,5 +7,12 @@ import { Component } from "@angular/core";
 })
 // tslint:disable-next-line: component-class-suffix
 export class ProductDetailsPage {
-    constructor() { }
+    category: string;
+    isEditable = true;
+
+    constructor(private route: ActivatedRoute) {
+        this.route.params.subscribe((params) => {
+            this.category = params.category;
+        });
+    }
 }

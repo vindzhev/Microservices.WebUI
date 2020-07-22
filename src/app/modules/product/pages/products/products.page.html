@@ -1,0 +1,42 @@
+<!-- <h1>Products works</h1>
+<hr>
+<div *ngIf="products$ | observalbeWithStatus | async as insuranceProducts">
+    <mat-spinner *ngIf="insuranceProducts.loading"></mat-spinner>
+    <ins-product-collection *ngIf="insuranceProducts.value" [products]="insuranceProducts.value">
+    </ins-product-collection>
+</div> -->
+
+
+
+<div class="flex-column" style="background-image: url(/assets/insurance-cover.jpg);height: 600px;
+background-position: center right;
+background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center; color: #ffffff;margin-bottom: 50px;">
+    <p class="half-width">Smart Insurance For your Better Family Life</p>
+    <span class="half-width" style="padding: 0 100px;margin-bottom: 20px;">Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Mauris
+        varius erat in dictum
+        aliquam. Quisque at
+        facilisis dolor, in tincidunt nulla. Nunc neque elit, viverra viverra laoreet non, condimentum ut turpis.
+    </span>
+
+    <div class="flex-row nowrap half-width" style="justify-content: center;">
+        <button mat-flat-button
+            style="background-color: #0069ff;color: #ffffff;margin-right: 20px;">{{selectedCategory | uppercase}}</button>
+        <button mat-flat-button [routerLink]="['offers']" style="background-color: #e9b0c9;color: #ffffff;">Get offer
+            ></button>
+    </div>
+</div>
+
+<div class="container">
+    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius erat in dictum aliquam. Quisque at
+        facilisis dolor, in tincidunt nulla. Nunc neque elit, viverra viverra laoreet non, condimentum ut turpis.Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit. Mauris varius erat in dictum aliquam. Quisque at facilisis
+        dolor, in tincidunt nulla. Nunc neque elit, viverra viverra laoreet non, condimentum ut turpis.Lorem ipsum dolor
+        sit amet, consectetur adipiscing elit. Mauris varius erat in dictum aliquam. Quisque at facilisis dolor, in
+        tincidunt nulla. Nunc neque elit, viverra viverra laoreet non, condimentum ut turpis. </span>
+</div>

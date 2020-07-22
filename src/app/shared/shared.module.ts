@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
     AngularMaterialModule,
     ErrorLoggerService,
-    GlobalErrorHandler
+    GlobalErrorHandler,
+    LoaderComponent
 } from './';
+import { ObservableWithStatus } from './pipes';
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        LoaderComponent,
+        ObservableWithStatus
+    ],
     imports: [
+        CommonModule,
         AngularMaterialModule
     ],
     providers: [
         ErrorLoggerService,
         GlobalErrorHandler
     ],
-    exports: []
+    exports: [
+        LoaderComponent,
+        ObservableWithStatus
+    ]
 })
 export class SharedModule { }

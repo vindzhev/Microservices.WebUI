@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Observable } from 'rxjs/internal/Observable';
+
+import { CategoryService } from '@core/services';
 import { AuthenticationService } from '@core/authentication/authentication.service';
 
 @Component({
@@ -8,5 +11,9 @@ import { AuthenticationService } from '@core/authentication/authentication.servi
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(public authenticationService: AuthenticationService) { }
+  categories$: Observable<string[]>;
+
+  constructor(public authenticationService: AuthenticationService, private categoryService: CategoryService) {
+    this.categories$ = this.categoryService.getCategories();
+  }
 }

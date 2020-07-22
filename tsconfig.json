@@ -27,6 +27,9 @@
       ],
       "@environments/*": [
         "environments/*"
+      ],
+      "@products/*": [
+        "app/modules/product/*"
       ]
     }
   },
